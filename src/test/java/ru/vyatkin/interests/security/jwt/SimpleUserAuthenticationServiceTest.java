@@ -33,7 +33,7 @@ class SimpleUserAuthenticationServiceTest {
     }
 
     @Test
-    public void testService() {
+    public void loginTest() {
         User user = new User(null, "login1", "first", "last",
                 passwordEncoder.encode("passwd"), Gender.MALE, new Date(),
                 null, "about", null, null, true);
@@ -42,6 +42,5 @@ class SimpleUserAuthenticationServiceTest {
         Assertions.assertTrue(login.isPresent());
         Optional<User> byToken = simpleUserAuthenticationService.findByToken(login.get());
         Assertions.assertEquals("login1", byToken.get().getLogin());
-
     }
 }
