@@ -81,7 +81,7 @@ class RegisterUserDTOTest {
         Optional<User> selected = userService.findUserById(saveUser.getId());
         Assertions.assertTrue(selected.isPresent());
         User selected0 = selected.get();
-        Assertions.assertEquals("url1", selected0.getAvatar().getPictures().get(0).getUrl());
+        Assertions.assertEquals("url1", selected0.getAvatar().getPictures().get(0).getFilename());
         Assertions.assertEquals("town", selected0.getTown().getName());
         Assertions.assertEquals("testLogin", selected0.getLogin());
         Assertions.assertEquals("first", selected0.getFirstname());

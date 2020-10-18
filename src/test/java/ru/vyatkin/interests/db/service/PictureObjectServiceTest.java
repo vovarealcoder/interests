@@ -69,17 +69,17 @@ class PictureObjectServiceTest {
         PictureObject object = pictureObjectService.insertPictureObject(pictureObject1);
         Optional<PictureObject> pictureObject = pictureObjectService.findPictureObject(object.getId());
         PictureObject pictureObject0 = pictureObject.get();
-        Set<String> urlSet = pictureObject0.getPictures().stream().map(Picture::getUrl).collect(Collectors.toSet());
+        Set<String> urlSet = pictureObject0.getPictures().stream().map(Picture::getFilename).collect(Collectors.toSet());
         Set<PictureSize> picSize = pictureObject0.getPictures().stream().map(Picture::getType).collect(Collectors.toSet());
         Assertions.assertTrue(urlSet.contains("url1"));
         Assertions.assertTrue(urlSet.contains("url2"));
-        pictureObject0.getPictures().get(0).setUrl("url3");
-        pictureObject0.getPictures().get(1).setUrl("url4");
+        pictureObject0.getPictures().get(0).setFilename("url3");
+        pictureObject0.getPictures().get(1).setFilename("url4");
         pictureObjectService.updatePictureObject(pictureObject0);
 
         Optional<PictureObject> updPic = pictureObjectService.findPictureObject(pictureObject0.getId());
         PictureObject updPic0 = updPic.get();
-        Set<String> urlSetUpd = updPic0.getPictures().stream().map(Picture::getUrl).collect(Collectors.toSet());
+        Set<String> urlSetUpd = updPic0.getPictures().stream().map(Picture::getFilename).collect(Collectors.toSet());
         Assertions.assertTrue(urlSetUpd.contains("url3"));
         Assertions.assertTrue(urlSetUpd.contains("url4"));
 

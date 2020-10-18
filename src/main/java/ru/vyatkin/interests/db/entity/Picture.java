@@ -10,8 +10,8 @@ public class Picture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "url")
-    private String url;
+    @Column(name = "filename")
+    private String filename;
 
     @Column(name = "type")
     @Enumerated(EnumType.ORDINAL)
@@ -27,9 +27,9 @@ public class Picture {
     @JoinColumn(name = "picture_object_id")
     private PictureObject pictureObject;
 
-    public Picture(Long id, String url, PictureSize type, Integer width, Integer height, PictureObject pictureObject) {
+    public Picture(Long id, String filename, PictureSize type, Integer width, Integer height, PictureObject pictureObject) {
         this.id = id;
-        this.url = url;
+        this.filename = filename;
         this.type = type;
         this.width = width;
         this.height = height;
@@ -47,12 +47,12 @@ public class Picture {
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
+    public String getFilename() {
+        return filename;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setFilename(String url) {
+        this.filename = url;
     }
 
     public PictureSize getType() {
@@ -93,7 +93,7 @@ public class Picture {
         if (o == null || getClass() != o.getClass()) return false;
         Picture picture = (Picture) o;
         return Objects.equals(id, picture.id) &&
-                Objects.equals(url, picture.url) &&
+                Objects.equals(filename, picture.filename) &&
                 type == picture.type &&
                 Objects.equals(width, picture.width) &&
                 Objects.equals(height, picture.height) &&
@@ -102,14 +102,14 @@ public class Picture {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, url, type, width, height, pictureObject);
+        return Objects.hash(id, filename, type, width, height, pictureObject);
     }
 
     @Override
     public String toString() {
         return "Picture{" +
                 "id=" + id +
-                ", url='" + url + '\'' +
+                ", url='" + filename + '\'' +
                 ", type=" + type +
                 ", width=" + width +
                 ", height=" + height +

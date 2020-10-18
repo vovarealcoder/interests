@@ -20,6 +20,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.liquibase:liquibase-core'
 	compile 'org.apache.commons:commons-lang3:3.9'
+	compile group: 'commons-io', name: 'commons-io', version: '2.4'
 	compile 'io.jsonwebtoken:jjwt:0.9.1'
 	compile group: 'com.google.guava', name: 'guava', version: '18.0'
 	runtimeOnly 'org.postgresql:postgresql'

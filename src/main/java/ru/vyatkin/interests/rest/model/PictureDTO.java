@@ -76,7 +76,7 @@ public class PictureDTO implements Serializable {
     }
 
     public static PictureDTO toDTO(Picture picture) {
-        return new PictureDTO(picture.getId(), picture.getUrl(),
+        return new PictureDTO(picture.getId(), picture.getFilename(),
                 picture.getType(), picture.getWidth(), picture.getHeight());
     }
 

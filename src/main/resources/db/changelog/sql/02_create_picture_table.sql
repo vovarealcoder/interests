@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS public.picture
 (
     id                bigserial               NOT NULL,
     picture_object_id bigint                  NOT NULL,
-    url               character varying(1000) NOT NULL,
+    filename          character varying(1000) NOT NULL,
     type              integer                 NOT NULL,
     width             integer                 NOT NULL,
     height            integer                 NOT NULL,

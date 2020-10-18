@@ -11,7 +11,6 @@ import ru.vyatkin.interests.db.entity.Category;
 import ru.vyatkin.interests.db.entity.Picture;
 import ru.vyatkin.interests.db.entity.PictureObject;
 import ru.vyatkin.interests.db.entity.PictureSize;
-import ru.vyatkin.interests.rest.model.PictureObjectDTO;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -132,8 +131,8 @@ class CategoryServiceTest {
         Optional<Category> categorySelected = categoryService.findCategory(insertCategory.getId());
         Category category0 = categorySelected.get();
         Assertions.assertNotNull(category0.getPictureObject());
-        Assertions.assertEquals("url1", category0.getPictureObject().getPictures().get(0).getUrl());
-        Assertions.assertEquals("url2", category0.getPictureObject().getPictures().get(1).getUrl());
+        Assertions.assertEquals("url1", category0.getPictureObject().getPictures().get(0).getFilename());
+        Assertions.assertEquals("url2", category0.getPictureObject().getPictures().get(1).getFilename());
     }
 
 }
