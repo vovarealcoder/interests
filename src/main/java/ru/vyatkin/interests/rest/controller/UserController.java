@@ -1,4 +1,4 @@
-package ru.vyatkin.interests.rest;
+package ru.vyatkin.interests.rest.controller;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;

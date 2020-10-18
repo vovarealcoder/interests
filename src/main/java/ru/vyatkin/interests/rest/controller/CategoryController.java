@@ -1,14 +1,15 @@
-package ru.vyatkin.interests.rest;
+package ru.vyatkin.interests.rest.controller;
 
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.web.bind.annotation.*;
-import ru.vyatkin.interests.db.entity.Category;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.vyatkin.interests.db.service.CategoryService;
 import ru.vyatkin.interests.rest.model.CategoryDTO;
 import ru.vyatkin.interests.rest.model.common.RequestStatus;
 import ru.vyatkin.interests.rest.model.common.ResponseDTO;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
