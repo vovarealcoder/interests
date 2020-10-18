@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.vyatkin.interests.DbConfig;
+import ru.vyatkin.interests.InterestsApplication;
 import ru.vyatkin.interests.db.entity.*;
 import ru.vyatkin.interests.db.service.TownService;
 import ru.vyatkin.interests.db.service.UserService;
@@ -17,7 +19,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Optional;
 
-@SpringBootTest
+@SpringBootTest(classes = {InterestsApplication.class, DbConfig.class})
 class RegisterUserDTOTest {
 
     @Autowired

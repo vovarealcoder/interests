@@ -5,13 +5,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import ru.vyatkin.interests.DbConfig;
+import ru.vyatkin.interests.InterestsApplication;
 import ru.vyatkin.interests.db.entity.RefreshToken;
 
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest(classes = {InterestsApplication.class, DbConfig.class})
 class RefreshTokenServiceTest {
 
     @Autowired

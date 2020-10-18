@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -25,6 +26,7 @@ import ru.vyatkin.interests.db.service.RefreshTokenService;
 import ru.vyatkin.interests.db.service.UserService;
 import ru.vyatkin.interests.security.TokenAuthenticationProvider;
 import ru.vyatkin.interests.security.UserAuthenticationService;
+import ru.vyatkin.interests.security.UserDetailsServiceImpl;
 import ru.vyatkin.interests.security.jwt.JwtUserAuthenticationService;
 import ru.vyatkin.interests.security.jwt.NoRedirectStrategy;
 import ru.vyatkin.interests.security.jwt.TokenAuthenticationFilter;
@@ -36,7 +38,8 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final RequestMatcher PUBLIC_URLS = new OrRequestMatcher(
             new AntPathRequestMatcher("/user/login"),
-            new AntPathRequestMatcher("/user/register")
+            new AntPathRequestMatcher("/user/register"),
+            new AntPathRequestMatcher("/user/refresh")
     );
     private static final RequestMatcher PROTECTED_URLS = new NegatedRequestMatcher(PUBLIC_URLS);
 
@@ -50,14 +53,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        httpSecurity.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .exceptionHandling()
                 .defaultAuthenticationEntryPointFor(forbiddenEntryPoint(), PROTECTED_URLS)
                 .and()
-                .authenticationProvider(
-                        authenticationProvider(
-                                authenticationService(userService, passwordEncoder())))
                 .addFilterBefore(tokenAuthenticationFilter(), AnonymousAuthenticationFilter.class)
                 .authorizeRequests()
                 .requestMatchers(PROTECTED_URLS)
@@ -69,10 +70,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().disable();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder authentication)
-            throws Exception {
-        authentication.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider(authenticationService(userService, passwordEncoder())));
+    }
+
+    @Override
+    public UserDetailsService userDetailsServiceBean() {
+        return new UserDetailsServiceImpl(userService);
     }
 
     @Bean
