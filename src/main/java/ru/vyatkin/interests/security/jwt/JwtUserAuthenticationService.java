@@ -7,7 +7,7 @@ import ru.vyatkin.interests.db.entity.RefreshToken;
 import ru.vyatkin.interests.db.entity.User;
 import ru.vyatkin.interests.db.service.RefreshTokenService;
 import ru.vyatkin.interests.db.service.UserService;
-import ru.vyatkin.interests.rest.model.AuthorizedDTO;
+import ru.vyatkin.interests.rest.model.user.AuthorizedDTO;
 import ru.vyatkin.interests.security.UserAuthenticationService;
 
 import java.time.LocalDate;

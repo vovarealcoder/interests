@@ -1,4 +1,4 @@
-package ru.vyatkin.interests.rest.model;
+package ru.vyatkin.interests.rest.model.user;
 
 import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -6,6 +6,8 @@ import ru.vyatkin.interests.db.entity.Gender;
 import ru.vyatkin.interests.db.entity.PictureObject;
 import ru.vyatkin.interests.db.entity.Town;
 import ru.vyatkin.interests.db.entity.User;
+import ru.vyatkin.interests.rest.model.PictureObjectDTO;
+import ru.vyatkin.interests.rest.model.TownDTO;
 
 import java.io.Serializable;
 import java.util.Date;

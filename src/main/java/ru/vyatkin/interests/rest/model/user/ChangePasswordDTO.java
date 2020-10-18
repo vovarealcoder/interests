@@ -1,4 +1,4 @@
-package ru.vyatkin.interests.rest.model;
+package ru.vyatkin.interests.rest.model.user;
 
 import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.password.PasswordEncoder;

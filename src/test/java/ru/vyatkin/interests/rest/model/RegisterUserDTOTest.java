@@ -7,17 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.vyatkin.interests.db.entity.*;
-import ru.vyatkin.interests.db.service.PictureObjectService;
 import ru.vyatkin.interests.db.service.TownService;
 import ru.vyatkin.interests.db.service.UserService;
+import ru.vyatkin.interests.rest.model.user.RegisterUserDTO;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class RegisterUserDTOTest {

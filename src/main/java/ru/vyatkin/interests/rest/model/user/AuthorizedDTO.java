@@ -1,4 +1,4 @@
-package ru.vyatkin.interests.rest.model;
+package ru.vyatkin.interests.rest.model.user;
 
 import java.io.Serializable;
 import java.util.Date;

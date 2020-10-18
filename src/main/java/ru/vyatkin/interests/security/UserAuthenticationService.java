@@ -1,7 +1,7 @@
 package ru.vyatkin.interests.security;
 
 import ru.vyatkin.interests.db.entity.User;
-import ru.vyatkin.interests.rest.model.AuthorizedDTO;
+import ru.vyatkin.interests.rest.model.user.AuthorizedDTO;
 
 import java.util.Optional;
 
@@ -17,6 +17,13 @@ public interface UserAuthenticationService {
     Optional<AuthorizedDTO> login(String username, String password);
 
 
+    /**
+     * Refresh access token by username and access token
+     *
+     * @param username
+     * @param refreshToken
+     * @return
+     */
     String refresh(String username, String refreshToken);
 
     /**
