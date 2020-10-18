@@ -16,18 +16,13 @@ import ru.vyatkin.interests.DbConfig;
 import ru.vyatkin.interests.InterestsApplication;
 import ru.vyatkin.interests.db.entity.Gender;
 import ru.vyatkin.interests.db.service.UserService;
-import ru.vyatkin.interests.rest.model.CategoryDTO;
 import ru.vyatkin.interests.rest.model.common.ResponseDTO;
 import ru.vyatkin.interests.rest.model.user.AuthorizedDTO;
 import ru.vyatkin.interests.rest.model.user.RegisterUserDTO;
-import sun.jvm.hotspot.utilities.Assert;
 
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = {InterestsApplication.class, DbConfig.class})
