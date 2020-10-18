@@ -21,11 +21,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
+import ru.vyatkin.interests.db.service.RefreshTokenService;
 import ru.vyatkin.interests.db.service.UserService;
 import ru.vyatkin.interests.security.TokenAuthenticationProvider;
 import ru.vyatkin.interests.security.UserAuthenticationService;
+import ru.vyatkin.interests.security.jwt.JwtUserAuthenticationService;
 import ru.vyatkin.interests.security.jwt.NoRedirectStrategy;
-import ru.vyatkin.interests.security.jwt.SimpleUserAuthenticationService;
 import ru.vyatkin.interests.security.jwt.TokenAuthenticationFilter;
 
 import static org.springframework.http.HttpStatus.FORBIDDEN;
@@ -40,9 +41,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final RequestMatcher PROTECTED_URLS = new NegatedRequestMatcher(PUBLIC_URLS);
 
     private final UserService userService;
+    private final RefreshTokenService refreshTokenService;
 
-    public SecurityConfig(UserService userService) {
+    public SecurityConfig(UserService userService, RefreshTokenService refreshTokenService) {
         this.userService = userService;
+        this.refreshTokenService = refreshTokenService;
     }
 
     @Override
@@ -102,7 +105,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserAuthenticationService authenticationService(UserService userService, PasswordEncoder passwordEncoder) {
-        return new SimpleUserAuthenticationService(userService, passwordEncoder);
+        return new JwtUserAuthenticationService(userService, refreshTokenService, passwordEncoder);
     }
 
     @Bean

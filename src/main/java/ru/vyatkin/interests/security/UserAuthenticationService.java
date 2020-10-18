@@ -1,6 +1,7 @@
 package ru.vyatkin.interests.security;
 
 import ru.vyatkin.interests.db.entity.User;
+import ru.vyatkin.interests.rest.model.AuthorizedDTO;
 
 import java.util.Optional;
 
@@ -13,7 +14,10 @@ public interface UserAuthenticationService {
      * @param password
      * @return an {@link Optional} of a user when login succeeds
      */
-    Optional<String> login(String username, String password);
+    Optional<AuthorizedDTO> login(String username, String password);
+
+
+    String refresh(String username, String refreshToken);
 
     /**
      * Finds a user by its dao-key.

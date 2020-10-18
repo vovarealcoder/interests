@@ -1,14 +1,12 @@
 package ru.vyatkin.interests.rest;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.vyatkin.interests.db.entity.User;
 import ru.vyatkin.interests.db.service.UserService;
+import ru.vyatkin.interests.rest.model.AuthorizedDTO;
 import ru.vyatkin.interests.rest.model.RegisterUserDTO;
-import ru.vyatkin.interests.rest.model.common.NoContentDTO;
+import ru.vyatkin.interests.rest.model.common.RequestStatus;
 import ru.vyatkin.interests.rest.model.common.ResponseDTO;
 import ru.vyatkin.interests.security.UserAuthenticationService;
 
@@ -32,13 +30,24 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("login") String login, @RequestParam("password") String password) {
+    public ResponseDTO<AuthorizedDTO> login(@RequestParam("login") String login,
+                                            @RequestParam("password") String password) {
         //todo login attempt counting
-        return userAuthenticationService.login(login, password).orElseThrow(() -> new RuntimeException("invalid login and/or password"));
+        return new ResponseDTO<>(RequestStatus.OK,
+                "Success", userAuthenticationService.login(login, password)
+                .orElseThrow(() -> new RuntimeException("invalid login and/or password")));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseDTO<Map<String, String>> refresh(@RequestParam("login") String login,
+                                                    @RequestParam("refreshtoken") String refreshtoken) {
+        String refresh = userAuthenticationService.refresh(login, refreshtoken);
+        return new ResponseDTO<>(RequestStatus.OK,
+                "Success", Collections.singletonMap("accessToken", refresh));
     }
 
     @PostMapping("/register")
-    public ResponseDTO<Map<String, Long>> register(@RequestParam("params") RegisterUserDTO registerUserDTO) {
+    public ResponseDTO<Map<String, Long>> register(@RequestBody RegisterUserDTO registerUserDTO) {
         User user = userService.saveUser(RegisterUserDTO.toJPA(registerUserDTO, passwordEncoder));
         return new ResponseDTO<>(OK, "Success", Collections.singletonMap("userId", user.getId()));
     }

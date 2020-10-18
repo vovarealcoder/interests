@@ -11,4 +11,5 @@
     <include file="/db/changelog/sql/03_create_category_table.sql"/>
     <include file="/db/changelog/sql/04_create_town_table.sql"/>
     <include file="/db/changelog/sql/05_create_user_table.sql"/>
+    <include file="/db/changelog/sql/06_refresh_token_table.sql"/>
 </databaseChangeLog>
