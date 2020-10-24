@@ -1,9 +1,7 @@
 package ru.vyatkin.interests.rest.model;
 
-import liquibase.util.ObjectUtil;
 import ru.vyatkin.interests.db.entity.Category;
 import ru.vyatkin.interests.db.entity.PictureObject;
-import ru.vyatkin.interests.db.entity.Town;
 
 import java.io.Serializable;
 import java.util.Objects;

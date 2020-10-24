@@ -1,10 +1,12 @@
 package ru.vyatkin.interests.rest.model;
 
+import ru.vyatkin.interests.annotations.Subtype;
 import ru.vyatkin.interests.db.entity.Town;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@Subtype
 public class TownDTO implements Serializable {
     private static final long serialVersionUID = -5989794996159971233L;
     private final Long id;

@@ -2,11 +2,13 @@ package ru.vyatkin.interests.rest.model.user;
 
 import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.vyatkin.interests.annotations.InputDTO;
 import ru.vyatkin.interests.db.entity.User;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@InputDTO
 public class ChangePasswordDTO implements Serializable {
     private static final long serialVersionUID = 7936580417134308925L;
 

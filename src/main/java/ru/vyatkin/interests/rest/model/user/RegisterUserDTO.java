@@ -2,6 +2,8 @@ package ru.vyatkin.interests.rest.model.user;
 
 import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.vyatkin.interests.annotations.InputDTO;
+import ru.vyatkin.interests.annotations.ResolveId;
 import ru.vyatkin.interests.db.entity.Gender;
 import ru.vyatkin.interests.db.entity.PictureObject;
 import ru.vyatkin.interests.db.entity.Town;
@@ -13,6 +15,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+@InputDTO
 public class RegisterUserDTO implements Serializable {
     private static final long serialVersionUID = -1882016312543430759L;
     private final String login;
@@ -22,12 +25,14 @@ public class RegisterUserDTO implements Serializable {
     private final Gender gender;
     private final Date birthdate;
     private final String about;
-    private final PictureObjectDTO avatar;
-    private final TownDTO town;
+    @ResolveId
+    private final Long avatar;
+    @ResolveId
+    private final Long town;
 
     public RegisterUserDTO(String login, String firstname, String lastname,
                            String password, Gender gender, Date birthdate,
-                           String about, PictureObjectDTO avatar, TownDTO town) {
+                           String about, Long avatar, Long town) {
         this.login = login;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -67,11 +72,11 @@ public class RegisterUserDTO implements Serializable {
         return about;
     }
 
-    public PictureObjectDTO getAvatar() {
+    public Long getAvatar() {
         return avatar;
     }
 
-    public TownDTO getTown() {
+    public Long getTown() {
         return town;
     }
 
@@ -112,7 +117,8 @@ public class RegisterUserDTO implements Serializable {
                 '}';
     }
 
-    public static User toJPA(RegisterUserDTO registerUserDTO, @Nullable PasswordEncoder passwordEncoder) {
+    public static User toJPA(RegisterUserDTO registerUserDTO,
+                             @Nullable PasswordEncoder passwordEncoder) {
         User user = new User();
         user.setLogin(registerUserDTO.login);
         user.setFirstname(registerUserDTO.firstname);
@@ -127,12 +133,6 @@ public class RegisterUserDTO implements Serializable {
         user.setBirthdate(registerUserDTO.birthdate);
         user.setAbout(registerUserDTO.about);
         user.setActive(false);
-        PictureObject avatar = registerUserDTO.avatar == null
-                ? null
-                : PictureObjectDTO.toJpa(registerUserDTO.avatar);
-        user.setAvatar(avatar);
-        Town town = registerUserDTO.avatar == null ? null : TownDTO.toJPA(registerUserDTO.town);
-        user.setTown(town);
         return user;
     }
 }

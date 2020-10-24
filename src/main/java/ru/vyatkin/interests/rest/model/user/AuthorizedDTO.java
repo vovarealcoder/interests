@@ -1,9 +1,12 @@
 package ru.vyatkin.interests.rest.model.user;
 
+import ru.vyatkin.interests.annotations.OutputDTO;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+@OutputDTO
 public class AuthorizedDTO implements Serializable {
     private static final long serialVersionUID = -2167629519147183752L;
     private final String refreshToken;

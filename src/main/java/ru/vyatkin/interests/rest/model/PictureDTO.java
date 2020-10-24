@@ -1,11 +1,13 @@
 package ru.vyatkin.interests.rest.model;
 
+import ru.vyatkin.interests.annotations.Subtype;
 import ru.vyatkin.interests.db.entity.Picture;
 import ru.vyatkin.interests.db.entity.PictureSize;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@Subtype
 public class PictureDTO implements Serializable {
     private static final long serialVersionUID = 1986994737709387836L;
     private final Long id;

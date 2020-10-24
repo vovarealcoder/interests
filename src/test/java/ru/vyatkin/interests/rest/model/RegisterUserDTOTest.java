@@ -75,14 +75,15 @@ class RegisterUserDTOTest {
         PictureObjectDTO pictureObjectDTO = new PictureObjectDTO(null, Collections.singletonList(pictureDTO));
         TownDTO townDTO = new TownDTO(savedTown.getId(), savedTown.getName());
         RegisterUserDTO registerUserDTO = new RegisterUserDTO("testLogin", "first",
-                "last", "passwd", Gender.MALE, birthdate, "about", pictureObjectDTO, townDTO);
+                "last", "passwd", Gender.MALE, birthdate, "about",
+                pictureObjectDTO.getId(), townDTO.getId());
         User user = RegisterUserDTO.toJPA(registerUserDTO, passwordEncoder);
         User saveUser = userService.saveUser(user);
         Optional<User> selected = userService.findUserById(saveUser.getId());
         Assertions.assertTrue(selected.isPresent());
         User selected0 = selected.get();
-        Assertions.assertEquals("url1", selected0.getAvatar().getPictures().get(0).getFilename());
-        Assertions.assertEquals("town", selected0.getTown().getName());
+        Assertions.assertNull(selected0.getAvatar());
+        Assertions.assertNull(selected0.getTown());
         Assertions.assertEquals("testLogin", selected0.getLogin());
         Assertions.assertEquals("first", selected0.getFirstname());
         Assertions.assertEquals("last", selected0.getLastname());
